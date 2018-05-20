@@ -1,21 +1,31 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import SearchView from './SearchView';
+import FlightsView from './FlightsView';
 
 class App extends Component {
-  render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-      </div>
-    );
-  }
+    state = {
+        flightData: {},
+        view: 'search'
+    }
+
+    onSearchSubmit = (flightData) => {
+        this.setState({
+            flightData: flightData,
+            view: 'flights'
+        })
+    }
+
+    render() {FlightsView
+        return (
+            <div>
+                {
+                    this.state.view === 'search' ?
+                    (<SearchView onAppSubmit={this.onSearchSubmit} />) :
+                    (<FlightsView flightData={this.state.flightData} />)
+                }
+            </div>
+        );
+    }
 }
 
 export default App;
