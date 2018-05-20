@@ -15,7 +15,7 @@ class App extends Component {
         })
     }
 
-    render() {FlightsView
+    render() {
         return (
             <div>
                 {

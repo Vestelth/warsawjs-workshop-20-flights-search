@@ -1,5 +1,6 @@
 import React from 'react';
 import Flight from './Flight';
+import FlightFilter from  './FlightFilter';
 
 class FlightsView extends React.Component {
 
@@ -21,12 +22,20 @@ class FlightsView extends React.Component {
         flights: []
     }
 
+    changeFilterValues = (values) => {
+        this.setState(values);
+    }
+
     render() {
-        const flightsMapped = this.state.flights.map( flight => (<Flight key={flight.id} flight={flight} />) )
+        // mapowanie komponentów Flight z przekazaniem danych z flights (z API)
+        const flightsMapped = this.state.flights
+            .filter( flight => flight.price < +this.state.priceMax )
+            .map( flight => (<Flight key={flight.id} flight={flight} />) )
 
         return (
             <div>
                 { flightsMapped }
+                <FlightFilter changeFilterValues={this.changeFilterValues} />
             </div>
         )
     }
